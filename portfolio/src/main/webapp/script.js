@@ -26,3 +26,20 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+/**
+ * Cycles through greetings in different languages for front page. 
+ */
+const greetings =['Hi, nice to meet you!', '¡Hola, encantado de conocerte!', '你好，很高興見到你', 'Salut! Enchanté!'];
+var textElement = document.getElementById("changeText");
+textElement.innerHTML = greetings[0];
+var counter = 1;
+var intervalLength = setInterval(change, 2000);
+
+function change() {
+    textElement.innerHTML = greetings[counter];
+    counter++;
+    if (counter >= greetings.length) {
+        counter = 0;
+    }
+}
