@@ -5,13 +5,38 @@
   width: 650px;
 }
 
-#greeting-container {
-  margin-top: 20px;
+.divider {
+  width: 100px;
+  height: auto;
+  display: inline-block;
 }
 
 body {
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+img {
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+img:hover {
+  opacity: 1;
+}
+
+img[src="images/profile.jpeg"] {
+  opacity: 1;
+}
+
+
+.image-link {
+  text-decoration: none;
+}
+
+
+.profile {
+  opacity: 1;
 }
 
 .topnav {
@@ -36,20 +61,4 @@ body {
 .topnav a.active {
   background-color: #B3A369;
   color: white;
-}
-
-.logos {
-  position: fixed;
-  top: 20%;
-  left: 40%;
-  margin-left: auto;
-  margin-right: auto;
-  right: auto;
-  display: inline-block;
-}
-
-.divider {
-  width: 80px;
-  height: auto;
-  display: inline-block;
 }
