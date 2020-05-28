@@ -16,16 +16,12 @@ body {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-img {
+.image-link img {
   opacity: 0.6;
   transition: 0.3s;
 }
 
-img:hover {
-  opacity: 1;
-}
-
-img[src="images/profile.jpeg"] {
+.image-link img:hover {
   opacity: 1;
 }
 
