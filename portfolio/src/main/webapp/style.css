@@ -38,8 +38,26 @@ body {
 }
 
 .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+.column {
+  float: left;
+  width: 25%;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.logos {
+  position: fixed;
+  top: 20%;
+  left: 30%;
+
 }
