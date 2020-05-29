@@ -1,18 +1,42 @@
-#content {
+.content {
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
   width: 650px;
 }
 
-#greeting-container {
-  margin-top: 20px;
+.flex-container {
+  display: flex;
+  flex-flow: row wrap; 
+  justify-content: center;
+
+}
+
+.divider {
+  width: 100px;
+  height: auto;
+  display: inline-block;
 }
 
 body {
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
 }
+
+.image-link img {
+  padding: 30px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.image-link img:hover {
+  opacity: 1;
+}
+
+.image-link {
+  text-decoration: none;
+}
+
 
 .topnav {
   overflow: hidden;
@@ -36,11 +60,4 @@ body {
 .topnav a.active {
   background-color: #B3A369;
   color: white;
-}
-
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
 }
