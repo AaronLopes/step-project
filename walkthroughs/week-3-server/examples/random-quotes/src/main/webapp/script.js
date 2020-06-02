@@ -21,10 +21,13 @@ function getRandomQuote() {
   // The fetch() function returns a Promise because the request is asynchronous.
   const responsePromise = fetch('/random-quote');
 <<<<<<< HEAD
+<<<<<<< HEAD
   
 
 =======
 >>>>>>> change random quote function, remove newline
+=======
+>>>>>>> d83f2436083485a9a1d009ede5f87bd52088f29f
   // When the request is complete, pass the response into handleResponse().
   responsePromise.then(handleResponse);
 }
