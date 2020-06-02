@@ -20,6 +20,7 @@ var textElement = document.getElementById("changeText");
 textElement.innerHTML = greetings[0];
 var counter = 1;
 var intervalLength = setInterval(change, 2000);
+document.getElementById("messagesBtn").addEventListener("click", getMessages);
 
 function change() {
     textElement.innerHTML = greetings[counter];
@@ -27,4 +28,24 @@ function change() {
     if (counter >= greetings.length) {
         counter = 0;
     }
+}
+
+function getMessages() {
+    fetch('/data').then(response => response.json()).then((messages) => {
+        const messageListElement = document.getElementById("messages-container");
+        messageListElement.innerHTML = '';
+        messageListElement.appendChild(
+            createListElement(messages[0]));
+        messageListElement.appendChild(
+            createListElement(messages[1]));
+        messageListElement.appendChild(
+            createListElement(messages[2]));
+    });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
