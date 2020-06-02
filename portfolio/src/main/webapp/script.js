@@ -28,3 +28,9 @@ function change() {
         counter = 0;
     }
 }
+
+function getHello() {
+    fetch('/data').then(response => response.text()).then((quote) => {
+    document.getElementById('hello-container').innerText = quote;
+  });
+}
