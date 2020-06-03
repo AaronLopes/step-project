@@ -27,13 +27,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  private List<String> messages;
+  private List<String> messages = new ArrayList<>();
 
-  public void init() {
-    messages = new ArrayList<>();
-    messages.add("How's it going?");
-    messages.add("Where are you?");
-    messages.add("I'll be available soon!");
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // If the user sends another POST request after the game is over, then start a new game.
+    String comment = getUserComment(request);
+    messages.add(comment);
+    response.sendRedirect("/index.html");
   }
   
   @Override
@@ -44,4 +45,10 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(json);
   }
 
+  private String getUserComment(HttpServletRequest request) {
+    String commentString = request.getParameter("comment-box");
+    return commentString;
+  }
+
 }
+	
