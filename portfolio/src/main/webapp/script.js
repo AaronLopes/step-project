@@ -34,8 +34,7 @@ function getMessages() {
   fetch('/data').then(response => response.json()).then((messages) => {
     const messageListElement = document.getElementById("messages-container");
     messageListElement.innerHTML = '';
-    var i;
-    for (i = 0; i < messages.length; i++) {
+    for (let i = 0; i < messages.length; i++) {
         messageListElement.appendChild(
         createListElement(messages[i]));
     }
