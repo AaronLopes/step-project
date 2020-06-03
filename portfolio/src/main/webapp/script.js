@@ -30,12 +30,6 @@ function change() {
   }
 }
 
-function getHello() {
-  fetch('/data').then(response => response.text()).then((quote) => {
-    document.getElementById('hello-container').innerText = quote;
-  });
-}
-
 function getMessages() {
   fetch('/data').then(response => response.json()).then((messages) => {
     const messageListElement = document.getElementById("messages-container");
