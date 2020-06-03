@@ -31,16 +31,15 @@ function change() {
 }
 
 function getMessages() {
-    fetch('/data').then(response => response.json()).then((messages) => {
-        const messageListElement = document.getElementById("messages-container");
-        messageListElement.innerHTML = '';
+  fetch('/data').then(response => response.json()).then((messages) => {
+    const messageListElement = document.getElementById("messages-container");
+    messageListElement.innerHTML = '';
+    var i;
+    for (i = 0; i < messages.length; i++) {
         messageListElement.appendChild(
-            createListElement(messages[0]));
-        messageListElement.appendChild(
-            createListElement(messages[1]));
-        messageListElement.appendChild(
-            createListElement(messages[2]));
-    });
+        createListElement(messages[i]));
+    }
+  });
 }
 
 /** Creates an <li> element containing text. */
