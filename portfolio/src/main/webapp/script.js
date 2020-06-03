@@ -23,15 +23,15 @@ var intervalLength = setInterval(change, 2000);
 document.getElementById("helloBtn").addEventListener('click', getHello);
 
 function change() {
-    textElement.innerHTML = greetings[counter];
-    counter++;
-    if (counter >= greetings.length) {
-        counter = 0;
-    }
+  textElement.innerHTML = greetings[counter];
+  counter++;
+  if (counter >= greetings.length) {
+    counter = 0;
+  }
 }
 
 function getHello() {
-    fetch('/data').then(response => response.text()).then((quote) => {
-        document.getElementById('hello-container').innerText = quote;
+  fetch('/data').then(response => response.text()).then((quote) => {
+    document.getElementById('hello-container').innerText = quote;
   });
 }
