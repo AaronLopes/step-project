@@ -20,7 +20,7 @@ var textElement = document.getElementById('changeText');
 textElement.innerHTML = greetings[0];
 var counter = 1;
 var intervalLength = setInterval(change, 2000);
-document.getElementById('commentBtn').addEventListener('click', getMessages);
+document.getElementById('commentBtn').addEventListener('click', getComments);
 
 function change() {
   textElement.innerHTML = greetings[counter];
@@ -30,7 +30,7 @@ function change() {
   }
 }
 
-function getMessages() {
+function getComments() {
   fetch('/data').then(response => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comment-container');
     commentListElement.innerHTML = '';
