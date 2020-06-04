@@ -24,7 +24,6 @@ function getSubtractionGame() {
     } else {
       totalEl.innerText = 'Total: ' + game.currentTotal;
     }
-    console.log(game);
     // Build the list of history entries.
     const historyEl = document.getElementById('history');
     game.history.forEach((line) => {
