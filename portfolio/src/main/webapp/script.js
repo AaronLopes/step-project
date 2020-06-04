@@ -16,11 +16,11 @@
  * Cycles through greetings in different languages for front page. 
  */
 const greetings =['Hi, nice to meet you!', '¡Hola, encantado de conocerte!', '你好，很高興見到你', 'Salut! Enchanté!'];
-var textElement = document.getElementById("changeText");
+var textElement = document.getElementById('changeText');
 textElement.innerHTML = greetings[0];
 var counter = 1;
 var intervalLength = setInterval(change, 2000);
-document.getElementById("helloBtn").addEventListener('click', getHello);
+document.getElementById('messagesBtn').addEventListener('click', getMessages);
 
 function change() {
   textElement.innerHTML = greetings[counter];
@@ -30,8 +30,19 @@ function change() {
   }
 }
 
-function getHello() {
-  fetch('/data').then(response => response.text()).then((quote) => {
-    document.getElementById('hello-container').innerText = quote;
+function getMessages() {
+  fetch('/data').then(response => response.json()).then((messages) => {
+    const messageListElement = document.getElementById('messages-container');
+    messageListElement.innerHTML = '';
+    for (let message of messages) {
+        messageListElement.appendChild(createListElement(message));
+    }
   });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
