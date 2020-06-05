@@ -34,14 +34,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  private static final String COMMENT_PARAM = "Comment";
+  private static final String TEXT_PROP = "text";
+  private static final String TIMESTAMP_PROP = "timestamp";
+
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = getUserComment(request);
     long timestamp = System.currentTimeMillis();
 
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("text", comment);
-    commentEntity.setProperty("timestamp", timestamp);
+    Entity commentEntity = new Entity(COMMENT_PARAM);
+    commentEntity.setProperty(TEXT_PROP, comment);
+    commentEntity.setProperty(TIMESTAMP_PROP, timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
@@ -51,7 +56,7 @@ public class DataServlet extends HttpServlet {
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    Query query = new Query(COMMENT_PARAM).addSort(TIMESTAMP_PROP, SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
@@ -59,8 +64,8 @@ public class DataServlet extends HttpServlet {
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
-      String commentText = (String) entity.getProperty("text");
-      long timestamp = (long) entity.getProperty("timestamp");
+      String commentText = (String) entity.getProperty(TEXT_PROP);
+      long timestamp = (long) entity.getProperty(TIMESTAMP_PROP);
 
       Comment comment = new Comment(id, commentText, timestamp);
       comments.add(comment);
