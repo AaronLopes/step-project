@@ -63,6 +63,10 @@ body {
   padding: 0 4px;
 }
 
+input[type=submit] {
+  display: block;
+}
+
 .topnav {
   overflow: hidden;
   background-color: white;
@@ -85,4 +89,9 @@ body {
 .topnav a.active {
   background-color: #B3A369;
   color: white;
+}
+
+textarea {
+  width: 500px;
+  height:100px;
 }
