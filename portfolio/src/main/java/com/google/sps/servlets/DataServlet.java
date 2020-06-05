@@ -39,7 +39,6 @@ public class DataServlet extends HttpServlet {
   private static final String TIMESTAMP_PROP = "timestamp";
   private static final String COMMENT_BOX_PARAM = "comment-box";
 
-
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String comment = getUserComment(request);
