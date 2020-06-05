@@ -37,6 +37,7 @@ public class DataServlet extends HttpServlet {
   private static final String COMMENT_PARAM = "Comment";
   private static final String TEXT_PROP = "text";
   private static final String TIMESTAMP_PROP = "timestamp";
+  private static final String COMMENT_BOX_PARAM = "comment-box";
 
 
   @Override
@@ -77,7 +78,7 @@ public class DataServlet extends HttpServlet {
   }
 
   private String getUserComment(HttpServletRequest request) {
-    return request.getParameter("comment-box");
+    return request.getParameter(COMMENT_BOX_PARAM);
   }
 
 }
