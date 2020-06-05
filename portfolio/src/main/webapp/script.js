@@ -31,7 +31,7 @@ function change() {
 }
 
 function getComments() {
-  fetch('/data').then(response => response.json()).then((comments) => {
+  fetch(`/data?comment-choice=${2}`).then(response => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comment-container');
     commentListElement.innerHTML = '';
     for (let comment of comments) {

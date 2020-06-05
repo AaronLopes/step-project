@@ -38,6 +38,7 @@ public class DataServlet extends HttpServlet {
   private static final String TEXT_PROP = "text";
   private static final String TIMESTAMP_PROP = "timestamp";
   private static final String COMMENT_BOX_PARAM = "comment-box";
+  private static final String NUM_COMMENTS_PARAM = "comment-choice";
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -56,19 +57,30 @@ public class DataServlet extends HttpServlet {
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    int numCommentDisplay = getNumDisplay(request);
+    if (numCommentDisplay == -1) {
+      response.setContentType("text/html");
+      response.getWriter().println("Please enter an integer between 1 and 10.");
+      return;
+    }
+
     Query query = new Query(COMMENT_PARAM).addSort(TIMESTAMP_PROP, SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     List<Comment> comments = new ArrayList<>();
+    int i = 0;
     for (Entity entity : results.asIterable()) {
-      long id = entity.getKey().getId();
-      String commentText = (String) entity.getProperty(TEXT_PROP);
-      long timestamp = (long) entity.getProperty(TIMESTAMP_PROP);
+      if (i < numCommentDisplay) {
+        long id = entity.getKey().getId();
+        String commentText = (String) entity.getProperty(TEXT_PROP);
+        long timestamp = (long) entity.getProperty(TIMESTAMP_PROP);
 
-      Comment comment = new Comment(id, commentText, timestamp);
-      comments.add(comment);
+        Comment comment = new Comment(id, commentText, timestamp);
+        comments.add(comment);  
+        i++;
+      }
     }
 
     Gson gson = new Gson();
@@ -78,6 +90,24 @@ public class DataServlet extends HttpServlet {
 
   private String getUserComment(HttpServletRequest request) {
     return request.getParameter(COMMENT_BOX_PARAM);
+  }
+
+  private int getNumDisplay(HttpServletRequest request) {
+    String numCommentsString = request.getParameter(NUM_COMMENTS_PARAM);
+    int numComments;
+    try {
+      numComments = Integer.parseInt(numCommentsString);
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + numCommentsString);
+      return -1;
+    }
+
+    if (numComments < 1 || numComments > 10) {
+      System.err.println("Display choice is out of range: " + numCommentsString);
+      return -1;
+    }
+
+    return numComments;
   }
 
 }
