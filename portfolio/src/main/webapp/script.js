@@ -35,7 +35,7 @@ function getComments() {
     const commentListElement = document.getElementById('comment-container');
     commentListElement.innerHTML = '';
     for (let comment of comments) {
-        messageListElement.appendChild(createListElement(comment));
+      commentListElement.appendChild(createListElement(comment.commentText));
     }
   });
 }
