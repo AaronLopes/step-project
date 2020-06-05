@@ -45,7 +45,7 @@ public class DataServlet extends HttpServlet {
   }
 
   private String getUserComment(HttpServletRequest request) {
-    return request.getParameter("comment-box");;
+    return request.getParameter("comment-box");
   }
 
 }
