@@ -20,7 +20,15 @@ var textElement = document.getElementById('changeText');
 textElement.innerHTML = greetings[0];
 var counter = 1;
 var intervalLength = setInterval(change, 2000);
+var map;
 document.getElementById('commentBtn').addEventListener('click', getComments);
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
+}
 
 function change() {
   textElement.innerHTML = greetings[counter];
