@@ -68,6 +68,7 @@ input[type=submit] {
 }
 
 #map {
+  border: thin solid black;
   height: 300px;
   width: 100%;
 }

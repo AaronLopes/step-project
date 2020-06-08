@@ -30,10 +30,32 @@ script.async = true;
 window.initMap = function() {
     const map = new google.maps.Map(
       document.getElementById('map'),
-      {center: {lat: 37.422403, lng: -122.088073}, zoom: 8});
+      {center: {lat: 37.422403, lng: -122.088073}, zoom: 5});
+    addLandmark(
+      map, 37.3230, -122.0322, 'Home',
+      'The city I spent my highschool years in, and currently live!');
+    addLandmark(
+      map, 42.3868, -72.5301, 'UMass Amherst',
+      'Where I attended prior to GT, 1.5 years of college completed!');
+    addLandmark(
+      map, 33.7756, -84.3963, 'Georgia Tech',
+      'Where I currently attend college!');
 };
 
 document.head.appendChild(script);
+
+function addLandmark(map, lat, lng, title, description) {
+  const marker = new google.maps.Marker(
+      {position: {lat: lat, lng: lng}, map: map, title: title});
+
+  const infoWindow = new google.maps.InfoWindow({content: description});
+  marker.addListener('click', () => {
+    infoWindow.open(map, marker);
+    var latLng = new google.maps.LatLng(lat, lng);
+    map.panTo(latLng);
+    map.setZoom(12);
+  });
+}
 
 function change() {
   textElement.innerHTML = greetings[counter];
