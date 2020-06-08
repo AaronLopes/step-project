@@ -17,7 +17,8 @@
       <!-- profile picture -->
       <img src="images/profile.jpeg" alt="profile" class="center">
       <h2><div id="changeText"></div></h2>
-      <p>Fill in later!</p>
+      <p>My name is Aaron Lopes, and I'm currently a rising junior studying Computer Science @ Georgia Tech!</p>
+      <div id="map"></div>
       <form action="/data" method="POST">
         <p>Leave a comment:</p>
         <textarea id="comment-box" name="comment-box" placeholder="Comment here.."></textarea>
@@ -29,5 +30,7 @@
       <ul id="comment-container"></ul>
     </div>
     <script src="script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+    async defer></script>
   </body>
 </html>
