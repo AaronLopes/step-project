@@ -68,18 +68,18 @@ public class DataServlet extends HttpServlet {
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-
     List<Comment> comments = new ArrayList<>();
-    int i = 0;
+
     for (Entity entity : results.asIterable()) {
-      if (i < numCommentDisplay) {
+      if (comments.size() >= numCommentDisplay) {
+        break;
+      } else {
         long id = entity.getKey().getId();
         String commentText = (String) entity.getProperty(TEXT_PROP);
         long timestamp = (long) entity.getProperty(TIMESTAMP_PROP);
 
         Comment comment = new Comment(id, commentText, timestamp);
         comments.add(comment);  
-        i++;
       }
     }
 
