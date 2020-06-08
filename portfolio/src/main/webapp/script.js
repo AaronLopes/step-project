@@ -20,15 +20,20 @@ var textElement = document.getElementById('changeText');
 textElement.innerHTML = greetings[0];
 var counter = 1;
 var intervalLength = setInterval(change, 2000);
-var map;
 document.getElementById('commentBtn').addEventListener('click', getComments);
 
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
-}
+var script = document.createElement('script');
+script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCvOQBXBFNraUfiCK-EYnLt7Oymct8m4Z0&callback=initMap';
+script.defer = true;
+script.async = true;
+
+window.initMap = function() {
+    const map = new google.maps.Map(
+      document.getElementById('map'),
+      {center: {lat: 37.422403, lng: -122.088073}, zoom: 8});
+};
+
+document.head.appendChild(script);
 
 function change() {
   textElement.innerHTML = greetings[counter];

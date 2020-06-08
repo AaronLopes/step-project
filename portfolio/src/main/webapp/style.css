@@ -67,6 +67,11 @@ input[type=submit] {
   display: block;
 }
 
+#map {
+  height: 300px;
+  width: 100%;
+}
+
 .topnav {
   overflow: hidden;
   background-color: white;
@@ -94,4 +99,10 @@ input[type=submit] {
 textarea {
   width: 500px;
   height:100px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
