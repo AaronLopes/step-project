@@ -20,7 +20,7 @@ var textElement = document.getElementById('changeText');
 textElement.innerHTML = greetings[0];
 var counter = 1;
 var intervalLength = setInterval(change, 2000);
-document.getElementById('messagesBtn').addEventListener('click', getMessages);
+document.getElementById('commentBtn').addEventListener('click', getComments);
 
 function change() {
   textElement.innerHTML = greetings[counter];
@@ -30,12 +30,13 @@ function change() {
   }
 }
 
-function getMessages() {
-  fetch('/data').then(response => response.json()).then((messages) => {
-    const messageListElement = document.getElementById('messages-container');
-    messageListElement.innerHTML = '';
-    for (let message of messages) {
-        messageListElement.appendChild(createListElement(message));
+function getComments() {
+  const displayValue = document.getElementById("comment-choice").value;
+  fetch(`/data?comment-choice=${displayValue}`).then(response => response.json()).then((comments) => {
+    const commentListElement = document.getElementById('comment-container');
+    commentListElement.innerHTML = '';
+    for (let comment of comments) {
+      commentListElement.appendChild(createListElement(comment.commentText));
     }
   });
 }
