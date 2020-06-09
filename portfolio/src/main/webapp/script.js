@@ -41,10 +41,10 @@ window.initMap = function() {
       map, 33.7756, -84.3963, 'Georgia Tech',
       'Where I currently attend college!');
     addLandmark(
-      map, 33.7756, -84.3963, 'Home Away From Home',
+      map, 19.4564, 72.7925, 'Home Away From Home',
       'Where my parents grew up; the comfort of my extended family and the cities unique culture always brings me back');
     addLandmark(
-      map, 33.7756, -84.3963, 'An Uncommon Layover',
+      map, 51.5074, -0.1278, 'An Uncommon Layover',
       'Spent an ambitious 8 hours searching for all the famous landmarks, check out pictures in misc!');
 };
 
