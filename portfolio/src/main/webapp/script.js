@@ -33,13 +33,19 @@ window.initMap = function() {
       {center: {lat: 37.422403, lng: -122.088073}, zoom: 5});
     addLandmark(
       map, 37.3230, -122.0322, 'Home',
-      'The city I spent my highschool years in, and currently live!');
+      'Where I currently live, and spent my high school years. Home to Apple HQ, the best boba, and my closest friends :)');
     addLandmark(
       map, 42.3868, -72.5301, 'UMass Amherst',
-      'Where I attended prior to GT, 1.5 years of college completed!');
+      'Snowy, remote, but cozy; where I spent my first 1.5 years of college.');
     addLandmark(
       map, 33.7756, -84.3963, 'Georgia Tech',
       'Where I currently attend college!');
+    addLandmark(
+      map, 33.7756, -84.3963, 'Home Away From Home',
+      'Where my parents grew up; the comfort of my extended family and the cities unique culture always brings me back');
+    addLandmark(
+      map, 33.7756, -84.3963, 'An Uncommon Layover',
+      'Spent an ambitious 8 hours searching for all the famous landmarks, check out pictures in misc!');
 };
 
 document.head.appendChild(script);
@@ -53,7 +59,7 @@ function addLandmark(map, lat, lng, title, description) {
     infoWindow.open(map, marker);
     var latLng = new google.maps.LatLng(lat, lng);
     map.panTo(latLng);
-    map.setZoom(12);
+    map.setZoom(10);
   });
 }
 
