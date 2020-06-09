@@ -11,7 +11,6 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-
 /**
  * Cycles through greetings in different languages for front page. 
  */
@@ -23,7 +22,7 @@ var intervalLength = setInterval(change, 2000);
 document.getElementById('commentBtn').addEventListener('click', getComments);
 
 var script = document.createElement('script');
-script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCvOQBXBFNraUfiCK-EYnLt7Oymct8m4Z0&callback=initMap';
+script.src = `https://maps.googleapis.com/maps/api/js?key=${MAPKEY}&callback=initMap`;
 script.defer = true;
 script.async = true;
 
