@@ -20,9 +20,11 @@ textElement.innerHTML = greetings[0];
 var counter = 1;
 var intervalLength = setInterval(change, 2000);
 document.getElementById('commentBtn').addEventListener('click', getComments);
+document.getElementById('darkModeBtn').addEventListener('click', toggleDarkMode);
 
 var script = document.createElement('script');
-script.src = `https://maps.googleapis.com/maps/api/js?key=${MAPKEY}&callback=initMap`;
+var mapKey = "AIzaSyAqIHjifUS07gOHlpTKNyyhUkMdwFzTnPk";
+script.src = `https://maps.googleapis.com/maps/api/js?key=${mapKey}&callback=initMap`;
 script.defer = true;
 script.async = true;
 
@@ -86,4 +88,9 @@ function createListElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
+}
+
+function toggleDarkMode() {
+    var bodyEl = document.body;
+    bodyEl.classList.toggle("dark"); 
 }
