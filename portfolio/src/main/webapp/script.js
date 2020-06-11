@@ -11,43 +11,32 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 /**
  * Cycles through greetings in different languages for front page. 
  */
 const greetings =['Hi, nice to meet you!', '¡Hola, encantado de conocerte!', '你好，很高興見到你', 'Salut! Enchanté!'];
-var textElement = document.getElementById('changeText');
+let textElement = document.getElementById('changeText');
 textElement.innerHTML = greetings[0];
-var counter = 1;
-var intervalLength = setInterval(change, 2000);
+let counter = 1;
+setInterval(change, 2000);
 document.getElementById('commentBtn').addEventListener('click', getComments);
 
-var script = document.createElement('script');
-script.src = `https://maps.googleapis.com/maps/api/js?key=${MAPKEY}&callback=initMap`;
-script.defer = true;
-script.async = true;
-
-window.initMap = function() {
+function initMap() {
     const map = new google.maps.Map(
       document.getElementById('map'),
       {center: {lat: 37.422403, lng: -122.088073}, zoom: 5});
-    addLandmark(
-      map, 37.3230, -122.0322, 'Home',
-      'Where I currently live, and spent my high school years. Home to Apple HQ, the best boba, and my closest friends :)');
-    addLandmark(
-      map, 42.3868, -72.5301, 'UMass Amherst',
-      'Snowy, remote, but cozy; where I spent my first 1.5 years of college.');
-    addLandmark(
-      map, 33.7756, -84.3963, 'Georgia Tech',
-      'Where I currently attend college!');
-    addLandmark(
-      map, 19.4564, 72.7925, 'Home Away From Home',
-      'Where my parents grew up; the comfort of my extended family and the cities unique culture always brings me back');
-    addLandmark(
-      map, 51.5074, -0.1278, 'An Uncommon Layover',
-      'Spent an ambitious 8 hours searching for all the famous landmarks, check out pictures in misc!');
+    const titles = ['Home', 'UMass Amherst', 'Georgia Tech', 'Home Away From Home', 'An Extraordinary Layover'];
+    const lats = [37.3230, 42.3868, 33.7756, 19.4564, 51.5074];
+    const lngs = [-122.0322,-72.5301, -84.3963, 72.7925, -0.1278]
+    const descriptions = ['Where I currently live, and spent my high school years. Home to Apple HQ, the best boba, \
+    and my closest friends :)', 'Snowy, remote, but cozy; where I spent my first 1.5 years of college.', 'Where I \
+    currently attend college!', 'Where my parents grew up; the comfort of my extended family and the cities unique \
+    culture always brings me back', 'Spent an ambitious 8 hours searching for all the famous landmarks, check out pictures in misc!'];
+    for (let i = 0; i < titles.length; i++) {
+        addLandmark(map, lats[i], lngs[i], titles[i], descriptions[i])
+    }
 };
-
-document.head.appendChild(script);
 
 function addLandmark(map, lat, lng, title, description) {
   const marker = new google.maps.Marker(
@@ -56,7 +45,7 @@ function addLandmark(map, lat, lng, title, description) {
   const infoWindow = new google.maps.InfoWindow({content: description});
   marker.addListener('click', () => {
     infoWindow.open(map, marker);
-    var latLng = new google.maps.LatLng(lat, lng);
+    let latLng = new google.maps.LatLng(lat, lng);
     map.panTo(latLng);
     map.setZoom(10);
   });
