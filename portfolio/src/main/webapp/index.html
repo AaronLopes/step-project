@@ -5,6 +5,8 @@
     <title>Home</title>
     <link href="style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script defer src="script.js"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqIHjifUS07gOHlpTKNyyhUkMdwFzTnPk&callback=initMap"></script>
   </head>
   <body>
     <div class="topnav">
@@ -17,7 +19,11 @@
       <!-- profile picture -->
       <img src="images/profile.jpeg" alt="profile" class="center">
       <h2><div id="changeText"></div></h2>
-      <p>Fill in later!</p>
+      <p>My name is Aaron Lopes, and I'm currently a rising junior studying Computer Science @ Georgia Tech!
+          While I grew up in the Bay Area for most of my life, I have traveled and lived in a broad variety
+          of places throughout my years. Explore the map below to check those places out!
+      </p>
+      <div id="map"></div>
       <form action="/data" method="POST">
         <p>Leave a comment:</p>
         <textarea id="comment-box" name="comment-box" placeholder="Comment here.."></textarea>
@@ -27,7 +33,6 @@
       <input type="number" id="comment-choice" min="1" max="10" value="1">
       <button id="commentBtn">Display</button>
       <ul id="comment-container"></ul>
-    </div>
-    <script src="script.js"></script>
+    </div>    
   </body>
 </html>
