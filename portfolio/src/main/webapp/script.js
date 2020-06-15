@@ -18,7 +18,7 @@ textElement.innerHTML = greetings[0];
 let counter = 1;
 setInterval(change, 2000);
 document.getElementById('commentBtn').addEventListener('click', getComments);
-const markers = []
+const markers = [];
 
 /**
  * Cycles through greetings in different languages for front page. 
@@ -67,7 +67,7 @@ function initMap() {
     for (let landmark of landmarks) {
       addLandmark(map, landmark);
     }
-    // add user landmark
+    // add user landmarks
 };
 
 function addLandmark(map, landmark) {
@@ -96,10 +96,7 @@ function closeAllInfoWindows(map) {
   });
 }
 
-function getUserLandmark(map) {
-  const markerTitle = document.getElementById("title-box");
-  const markerDesc = document.getElementById("desc-box");
-
+function getUserLandmarks(map) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = {
@@ -108,13 +105,12 @@ function getUserLandmark(map) {
       };
 
       infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
       infoWindow.open(map);
       map.setCenter(pos);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
-
+  }
 }
 
 function getComments() {
