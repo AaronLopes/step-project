@@ -19,6 +19,13 @@
   padding: 2px 16px;
 }
 
+.comment-box {
+  height: 100px;
+  border-radius: 8px;
+  border: 2px solid #545454;
+  outline: 0;
+}
+
 .content {
   margin-top: 50px;
   margin-left: auto;
@@ -39,7 +46,7 @@
   display: inline-block;
 }
 
-body {
+body, html {
   margin: 0;
   font-family: Roboto, Arial, sans-serif;
 }
@@ -64,13 +71,33 @@ body {
 }
 
 input[type=submit] {
+  margin-top: 10px;
   display: block;
+  padding: 0.35em 1.2em;
+  background-color: transparent;
+  border: 0.1em solid #545454;
+  box-sizing: border-box;
+  border-radius: 0.12em;
+  font-family: Roboto, Arial, sans-serif;
+  text-align: center;
 }
 
 #map {
   border: thin solid black;
   height: 300px;
   width: 100%;
+}
+
+::placeholder {
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 13px;
+}
+
+.title-box, .desc-box {
+  height: 20px;
+  border-radius: 8px;
+  border: 2px solid #545454;
+  outline: 0;
 }
 
 .topnav {
@@ -99,11 +126,6 @@ input[type=submit] {
 
 textarea {
   width: 500px;
-  height:100px;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 13px;
 }

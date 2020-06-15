@@ -67,6 +67,7 @@ function initMap() {
     for (let landmark of landmarks) {
       addLandmark(map, landmark);
     }
+    // add user landmark
 };
 
 function addLandmark(map, landmark) {
@@ -93,6 +94,27 @@ function closeAllInfoWindows(map) {
   markers.forEach(function(marker) {
     marker.info.close(map, marker);
   });
+}
+
+function getUserLandmark(map) {
+  const markerTitle = document.getElementById("title-box");
+  const markerDesc = document.getElementById("desc-box");
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      infoWindow.open(map);
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+
 }
 
 function getComments() {
