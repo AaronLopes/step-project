@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link href="style.css" rel="stylesheet">
+    <link id="light-theme" href="style.css" rel="stylesheet">
+    <link id="dark-theme" href="dark-style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   </head>
   <body> 
@@ -13,7 +14,6 @@
       <a href="socials.html">socials</a>
       <a href="misc.html">misc</a>
     </div>
-    <button id="darkModeBtn">Dark Mode</button>
     <div class="content">
       <!-- profile picture -->
       <img src="images/profile.jpeg" alt="profile" class="center">
@@ -32,7 +32,8 @@
       <input type="number" id="comment-choice" min="1" max="10" value="1">
       <button id="commentBtn">Display</button>
       <ul id="comment-container"></ul>
-    </div>    
+      <button id="darkModeBtn">Dark Mode</button>
+    </div>
   </body>
   <script src="script.js"></script>
 </html>
