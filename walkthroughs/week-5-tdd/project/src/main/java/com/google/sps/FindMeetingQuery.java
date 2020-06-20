@@ -35,7 +35,6 @@ public final class FindMeetingQuery {
       return possibleRanges;
     }
    
-    // inefficient, optimize later
     for (String attendee : requestAttendees) {
       for (Event event : events) {
         if (event.getAttendees().contains(attendee)) {
@@ -49,7 +48,6 @@ public final class FindMeetingQuery {
       return possibleRanges;
     }
 
-    // merge overlapping ranges into one range    
     for (Event event : overlapEvents) {
       overlapRanges.add(event.getWhen());
     }
@@ -93,7 +91,6 @@ public final class FindMeetingQuery {
       i++;
     }
 
-    // remove ranges which are shorter than 
     for (i = 0; i < possibleRanges.size(); i++) {
       if (possibleRanges.get(i).duration() < requestDuration) {
         possibleRanges.remove(i);
