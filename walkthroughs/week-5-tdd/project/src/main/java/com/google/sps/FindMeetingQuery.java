@@ -21,13 +21,9 @@ import java.util.List;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    // MEETING_REQUEST has name, duration in minutes, collection of attendees
-    // event in EVENTS has name, time range, collection of attendees
-
     List<Event> overlapEvents = new ArrayList<Event>();
     List<TimeRange> overlapRanges = new ArrayList<TimeRange>();
     List<TimeRange> noOverlapRanges = new ArrayList<TimeRange>();
-    Collection<String> requestAttendees = request.getAttendees();
     List<TimeRange> possibleRanges = new ArrayList<TimeRange>();
     int requestDuration = (int) request.getDuration();
 
@@ -35,7 +31,7 @@ public final class FindMeetingQuery {
       return possibleRanges;
     }
    
-    for (String attendee : requestAttendees) {
+    for (String attendee : request.getAttendees()) {
       for (Event event : events) {
         if (event.getAttendees().contains(attendee)) {
           overlapEvents.add(event);
