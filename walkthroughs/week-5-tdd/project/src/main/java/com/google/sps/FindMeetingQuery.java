@@ -27,10 +27,12 @@ public final class FindMeetingQuery {
     List<TimeRange> possibleRanges = new ArrayList<TimeRange>();
     int requestDuration = (int) request.getDuration();
 
+    // 1 check edge case of invalid request
     if (requestDuration > TimeRange.WHOLE_DAY.duration()) {
       return new ArrayList<TimeRange>();
     }
    
+   // 2 add events which overlap with required attendees to list
     for (String attendee : request.getAttendees()) {
       for (Event event : events) {
         if (event.getAttendees().contains(attendee) && !overlapRanges.contains(attendee)) {
@@ -39,56 +41,60 @@ public final class FindMeetingQuery {
       }
     }
 
+    // 3 if no overlapping attendees, return whole day
     if (overlapRanges.isEmpty()) {
       return new ArrayList<TimeRange>(Arrays.asList(TimeRange.WHOLE_DAY));
     }
 
+    // 4 sort the overlapping ranges
     Collections.sort(overlapRanges, TimeRange.ORDER_BY_START);
   
-    int i = 0;
-    while (i < overlapRanges.size()) {
-      TimeRange currRange = overlapRanges.get(i);
-      int j = i + 1;
-      while (j < overlapRanges.size()) {
-        TimeRange nextRange = overlapRanges.get(j);
-        if (currRange.overlaps(nextRange)) {
-          int modEnd = currRange.end() > nextRange.end() ? currRange.end() : nextRange.end();
-          currRange = TimeRange.fromStartEnd(currRange.start(), modEnd, false);
-          i = j;
-          j++;
-        } else {
-          break;
+    // 5 check if next range overlaps current range, if so merge the range
+    for (TimeRange range : overlapRanges) {
+      if (noOverlapRanges.isEmpty()) {
+        noOverlapRanges.add(range);
+      } else {
+        int prevIndex = noOverlapRanges.size() - 1;
+        TimeRange prevRange = noOverlapRanges.get(prevIndex);
+        if (range.overlaps(prevRange) && prevRange.end() < range.end()) {
+          noOverlapRanges.set(prevIndex, TimeRange.fromStartEnd(prevRange.start(), range.end(), false));
+        } else if (!range.overlaps(prevRange)) {
+          noOverlapRanges.add(range);
         }
       }
-      noOverlapRanges.add(currRange);
-      i++;
     }
-
+   
+    // 6 check if their is a gap between start of day and first range
     if (noOverlapRanges.get(0).start() > TimeRange.START_OF_DAY) {
       possibleRanges.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, noOverlapRanges.get(0).start(), false));
     }
 
-    i = 0;
+    // 7 iterate over ranges and add gaps to possible range list
+    int i = 0;
     while (i < noOverlapRanges.size()) {
       TimeRange currRange = noOverlapRanges.get(i);
       int j = i + 1;
       if (j >= noOverlapRanges.size()) {
-        if (currRange.end() < TimeRange.END_OF_DAY) {
-          possibleRanges.add(TimeRange.fromStartEnd(currRange.end(), TimeRange.END_OF_DAY, true));
-        }
+        possibleRanges.add(TimeRange.fromStartEnd(currRange.end(), TimeRange.END_OF_DAY, true));
       } else {
         possibleRanges.add(TimeRange.fromStartEnd(currRange.end(), noOverlapRanges.get(j).start(), false));
       }
       i++;
     }
 
-    for (i = 0; i < possibleRanges.size(); i++) {
-      if (possibleRanges.get(i).duration() < requestDuration) {
-        possibleRanges.remove(i);
+
+    // 8 return ranges which are geq request duration
+    return filterRanges(possibleRanges, requestDuration);
+  }
+
+  public Collection<TimeRange> filterRanges(Collection<TimeRange> ranges, int duration) {
+    List<TimeRange> filteredRanges = new ArrayList<TimeRange>();
+    for (TimeRange range : ranges) {
+      if (range.duration() >= duration) {
+        filteredRanges.add(range);
       }
     }
-
-    return possibleRanges;
+    return filteredRanges;
   }
 
 }
