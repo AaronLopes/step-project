@@ -22,13 +22,13 @@ import java.util.List;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    ArrayList<TimeRange> overlapRanges = new ArrayList<TimeRange>();
     int requestDuration = (int) request.getDuration();
 
     if (requestDuration > TimeRange.WHOLE_DAY.duration()) {
       return new ArrayList<TimeRange>();
     }
 
+    List<TimeRange> overlapRanges = new ArrayList<TimeRange>();
     for (Event event : events) {
       for (String attendee : request.getAttendees()) {
         if (event.getAttendees().contains(attendee)) {
